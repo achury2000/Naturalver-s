@@ -2,13 +2,13 @@
 import { buildConfig } from 'payload';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-
-import { Products } from './src/collections/Products';
-import { Orders } from './src/collections/Orders';
-import { Users } from './src/collections/Users';
-import { Pages } from './src/collections/Pages';
-import { Categories } from './src/collections/Categories';
-import { Media } from './src/collections/Media';
+import sharp from 'sharp';
+import { Products } from '@/collections/Products';
+import { Orders } from '@/collections/Orders';
+import { Users } from '@/collections/Users';
+import { Pages } from '@/collections/Pages';
+import { Categories } from '@/collections/Categories';
+import { Media } from '@/collections/Media';
 
 const config = buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
@@ -24,6 +24,7 @@ const config = buildConfig({
     },
   },
   editor: lexicalEditor(),
+  sharp,
   typescript: {
     outputFile: 'src/types/payload.ts',
   },

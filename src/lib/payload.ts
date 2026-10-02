@@ -1,4 +1,3 @@
-import { getMockProducts, getMockProductBySlug, getMockCategories } from './mock-data';
 import { headers } from 'next/headers';
 
 async function getPayloadApiUrl(): Promise<string> {
@@ -50,7 +49,11 @@ export async function queryProducts(params: {
     Object.entries(where).forEach(([key, value]) => {
       if (typeof value === 'object' && value !== null) {
         Object.entries(value as Record<string, unknown>).forEach(([op, val]) => {
+          if (Array.isArray(val)) {
+          val.forEach((entry) => searchParams.append(`where[${key}][${op}][]`, String(entry)));
+        } else {
           searchParams.set(`where[${key}][${op}]`, String(val));
+        }
         });
       } else {
         searchParams.set(`where[${key}]`, String(value));
@@ -77,16 +80,54 @@ export async function queryCategories(depth = 0) {
 
 export async function queryPageBySlug(slug: string) {
   try {
-    return payloadFetch<{ docs: any[] }>(
+    const res = await payloadFetch<{ docs: any[] }>(
       `/pages?where[slug][equals]=${encodeURIComponent(slug)}&limit=1`
-    ).then((res) => res.docs[0] || null);
+    );
+    return res.docs[0] || null;
   } catch {
     return null;
   }
 }
 
-export function getImageUrl(image: any): string {
-  if (!image) return '/placeholder-product.jpg';
-  if (typeof image === 'string') return image;
-  return image?.url || '/placeholder-product.jpg';
+export interface OrderDraft {
+  orderNumber: string;
+  items: Array<{
+    product: string;
+    quantity: number;
+    price: number;
+    name: string;
+  }>;
+  subtotal: number;
+  shipping: number;
+  total: number;
+  shippingAddress: {
+    name: string;
+    phone: string;
+    address: string;
+    city: string;
+    department: string;
+    zip: string;
+  };
+  status: 'pending';
+  paymentMethod: 'whatsapp';
+  notes?: string;
 }
+
+export interface CreatedOrder {
+  id: string;
+  orderNumber: string;
+  subtotal: number;
+  shipping: number;
+  total: number;
+}
+
+export async function createOrder(draft: OrderDraft): Promise<CreatedOrder> {
+  const response = await payloadFetch<{ doc: CreatedOrder }>('/orders', {
+    method: 'POST',
+    body: JSON.stringify(draft),
+  });
+
+  return response.doc;
+}
+
+export { getImageUrl } from './media';

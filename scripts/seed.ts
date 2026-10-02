@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { mockProducts, mockCategories } from '../src/lib/mock-data';
+import { mockProducts, mockCategories } from './fixtures/catalog';
 
 interface MockCategory {
   id: string;

@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -16,8 +16,9 @@ export const Pages: CollectionConfig = {
     },
     {
       name: 'slug',
-      // @ts-ignore - slug field type not in Payload 3 FieldType union (type definition issue)
+      // @ts-ignore - slug field type not in Payload 3 FieldType union
       type: 'slug',
+      // @ts-ignore - relationTo expects CollectionSlug but string literal works at runtime
       relationTo: 'title',
       admin: {
         position: 'sidebar',

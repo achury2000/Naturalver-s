@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -52,16 +52,28 @@ export const Users: CollectionConfig = {
           name: 'department',
           type: 'text',
         },
-        {
-          name: 'zip',
-          type: 'text',
-        },
-        {
-          name: 'isDefault',
-          type: 'checkbox',
-          defaultValue: false,
-        },
-      ],
+{
+      name: 'zip',
+      type: 'text',
     },
+    {
+      name: 'isDefault',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+  ],
+},
+{
+  name: 'role',
+  type: 'select',
+  options: [
+    { label: 'Admin', value: 'admin' },
+    { label: 'Customer', value: 'customer' },
+  ],
+  defaultValue: 'customer',
+  admin: {
+    position: 'sidebar',
+  },
+},
   ],
 };

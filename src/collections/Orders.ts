@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
 export const Orders: CollectionConfig = {
   slug: 'orders',
@@ -8,7 +8,7 @@ export const Orders: CollectionConfig = {
   },
   access: {
     read: ({ req }) => req.user?.role === 'admin',
-    create: ({ req }) => req.user?.role === 'admin',
+    create: () => true,
     update: ({ req }) => req.user?.role === 'admin',
     delete: ({ req }) => req.user?.role === 'admin',
   },
@@ -119,6 +119,7 @@ export const Orders: CollectionConfig = {
       name: 'paymentMethod',
       type: 'select',
       options: [
+        { label: 'WhatsApp', value: 'whatsapp' },
         { label: 'Contrarecibo', value: 'contrarecibo' },
         { label: 'Tarjeta', value: 'card' },
         { label: 'Transferencia', value: 'transfer' },

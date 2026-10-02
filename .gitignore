@@ -3,3 +3,10 @@ node_modules
 .env
 .env.local
 *.log
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# NOTE: media/ is intentionally NOT ignored.
+# `npm run seed` writes Media rows pointing at files in media/,
+# so ignoring it reproduces "File ... is missing on the disk" 500s on a fresh clone.
