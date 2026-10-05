@@ -1,0 +1,19 @@
+# Los scripts POSIX /bin/sh deben conservar LF.
+# Con core.autocrlf=true, un checkout desde Windows o un editor pueden
+# introducir CRLF, y el shebang falla con "bad interpreter" en macOS/Linux.
+*.sh text eol=lf
+
+# Lo mismo para el Dockerfile y los compose: un CRLF en la lista de
+# continuación de un RUN rompe el build en Linux.
+Dockerfile text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# media/ debe conservarse byte a byte: Payload resuelve las subidas como
+# media/<filename> y los jpg versionados son los que hacen válidas las filas
+# de la colección media en un clon nuevo.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.ico binary

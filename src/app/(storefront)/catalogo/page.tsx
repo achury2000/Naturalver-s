@@ -101,12 +101,12 @@ export default async function CatalogoPage({
           ) : (
             <div className="py-12 text-center">
               <p className="text-gray-500">No se encontraron productos para &ldquo;{searchQuery}&rdquo;</p>
-              <button
-                onClick={() => (window.location.search = '')}
-                className="mt-4 text-sm font-medium text-brand-dark hover:underline"
+              <Link
+                href="/catalogo"
+                className="mt-4 inline-block text-sm font-medium text-brand-dark hover:underline"
               >
                 Limpiar filtros
-              </button>
+              </Link>
             </div>
           )}
         </Container>

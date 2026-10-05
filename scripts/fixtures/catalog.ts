@@ -1,109 +1,14 @@
 // Fixtures used only by `npm run seed` to bootstrap the database.
-export const mockProducts = [
-  {
-    id: '1',
-    name: 'Suplemento de Espirulina',
-    slug: 'espirulina',
-    description: 'Suplemento natural rico en proteínas y hierro.',
-    price: 85000,
-    compareAtPrice: 120000,
-    category: { id: 'cat1', name: 'Suplementos' },
-    images: [{ image: { url: 'https://placehold.co/400x400/036654/FFFFFF?text=Espirulina' }, alt: 'Espirulina' }],
-    stock: 50,
-    inStock: true,
-    rating: 4.5,
-    reviewCount: 24,
-    newArrival: true,
-    featured: true,
-    createdAt: '2025-01-01T00:00:00.000Z',
-  },
-  {
-    id: '2',
-    name: 'Crema Facial Natural',
-    slug: 'crema-facial',
-    description: 'Crema hidratante con ingredientes naturales.',
-    price: 65000,
-    category: { id: 'cat2', name: 'Cosmética' },
-    images: [{ image: { url: 'https://placehold.co/400x400/69AB4F/FFFFFF?text=Crema+Facial' }, alt: 'Crema Facial' }],
-    stock: 30,
-    inStock: true,
-    rating: 4.8,
-    reviewCount: 18,
-    newArrival: false,
-    featured: true,
-    createdAt: '2025-01-02T00:00:00.000Z',
-  },
-  {
-    id: '3',
-    name: 'Té Verde Orgánico',
-    slug: 'te-verde',
-    description: 'Té verde orgánico de alta calidad.',
-    price: 45000,
-    compareAtPrice: 60000,
-    category: { id: 'cat3', name: 'Alimentos' },
-    images: [{ image: { url: 'https://placehold.co/400x400/273B52/FFFFFF?text=Te+Verde' }, alt: 'Té Verde' }],
-    stock: 100,
-    inStock: true,
-    rating: 4.3,
-    reviewCount: 32,
-    newArrival: false,
-    featured: false,
-    createdAt: '2025-01-03T00:00:00.000Z',
-  },
-  {
-    id: '4',
-    name: 'Aceite de Coco Prensado',
-    slug: 'aceite-coco',
-    description: 'Aceite de coco prensado en frío.',
-    price: 55000,
-    category: { id: 'cat3', name: 'Alimentos' },
-    images: [{ image: { url: 'https://placehold.co/400x400/0CA6DF/FFFFFF?text=Aceite+Coco' }, alt: 'Aceite de Coco' }],
-    stock: 60,
-    inStock: true,
-    rating: 4.6,
-    reviewCount: 15,
-    newArrival: true,
-    featured: true,
-    createdAt: '2025-01-04T00:00:00.000Z',
-  },
-  {
-    id: '5',
-    name: 'Shampoo Natural',
-    slug: 'shampoo-natural',
-    description: 'Shampoo sin sulfatos con ingredientes naturales.',
-    price: 72000,
-    category: { id: 'cat2', name: 'Cosmética' },
-    images: [{ image: { url: 'https://placehold.co/400x400/036654/FFFFFF?text=Shampoo' }, alt: 'Shampoo Natural' }],
-    stock: 40,
-    inStock: true,
-    rating: 4.4,
-    reviewCount: 12,
-    newArrival: false,
-    featured: false,
-    createdAt: '2025-01-05T00:00:00.000Z',
-  },
-  {
-    id: '6',
-    name: 'Vitamina Multivitamínico',
-    slug: 'multivitaminico',
-    description: 'Complejo vitamínico diario.',
-    price: 95000,
-    compareAtPrice: 130000,
-    category: { id: 'cat1', name: 'Suplementos' },
-    images: [{ image: { url: 'https://placehold.co/400x400/69AB4F/FFFFFF?text=Mivitamnico' }, alt: 'Multivitamínico' }],
-    stock: 25,
-    inStock: true,
-    rating: 4.7,
-    reviewCount: 28,
-    newArrival: true,
-    featured: true,
-    createdAt: '2025-01-06T00:00:00.000Z',
-  },
-];
+//
+// The data lives in `catalog.json` (not in a .ts file) for one reason:
+// the idempotent production seed (`scripts/seed-idempotent.mjs`) must run
+// with plain `node` inside the runtime image, where TypeScript and the
+// `tsx` devDependency are NOT installed. A .json file is the only shape
+// that is importable by both `tsx` (local dev) and bare `node` (prod).
+//
+// This module stays as the typed entry point so `scripts/seed.ts`
+// keeps working unchanged. There is a single source of truth: catalog.json.
+import catalog from './catalog.json';
 
-export const mockCategories = [
-  { id: 'cat1', name: 'Suplementos', slug: 'suplementos', order: 1 },
-  { id: 'cat2', name: 'Cosmética', slug: 'cosmetica', order: 2 },
-  { id: 'cat3', name: 'Alimentos', slug: 'alimentos', order: 3 },
-  { id: 'cat4', name: 'Bebidas', slug: 'bebidas', order: 4 },
-];
+export const mockProducts = catalog.products;
+export const mockCategories = catalog.categories;

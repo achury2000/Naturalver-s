@@ -1,0 +1,48 @@
+# Dependencies / build output
+node_modules
+.next
+out
+build
+dist
+*.tsbuildinfo
+next-env.d.ts
+
+# Git & VCS
+.git
+.gitignore
+.gitattributes
+.github
+
+# Secrets — the image gets its config from compose env / build args.
+# .env.example IS copied (not needed at build, but harmless) — see below.
+.env
+.env.*
+!.env.example
+
+# Docker files themselves are not needed inside the image
+Dockerfile
+.dockerignore
+docker-compose.yml
+compose.prod.yaml
+deploy-prod.sh
+
+# Agent / spec / docs tooling (not part of the runtime)
+.opencode
+openspec
+*.md
+!README.md
+
+# Local dev / editor cruft
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-error.log*
+.eslintcache
+
+# NOTE: media/ is intentionally NOT ignored.
+# Payload resolves uploaded media as `media/<filename>`, and the 6 committed
+# jpgs are what make the seeded media rows valid on a fresh clone. Ignoring it
+# reproduces "File ... for collection media is missing on the disk" + 500s.
+# The same applies to public/placeholder-product.jpg (getImageUrl fallback).

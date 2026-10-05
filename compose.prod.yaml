@@ -1,0 +1,93 @@
+# ============================================================================
+# NATURALVER'S — Compose de PRODUCCIÓN
+#
+# Se usa siempre a través de deploy-prod.sh, que pasa
+#   --env-file .env -f compose.prod.yaml
+#
+# Este archivo NO abre el puerto 27017 al host: MongoDB sólo es alcanzable
+# desde la red interna de Compose. Para entrar por tunnel:
+#   docker compose -f compose.prod.yaml exec mongo mongosh
+# ============================================================================
+
+name: naturalvers
+
+services:
+  # --------------------------------------------------------------------------
+  # app — Next.js 15 (standalone) + Payload CMS 3 sobre el mismo servidor
+  # --------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Los NEXT_PUBLIC_* se INLINEAN en el bundle del cliente durante el
+        # build, no en runtime. Si no se pasan aquí, el navegador recibe
+        # valores fijos compilados dentro del JS, y cambiar la variable en
+        # .env no surtirá efecto hasta el próximo build.
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_PAYLOAD_API_URL: ${NEXT_PUBLIC_PAYLOAD_API_URL:-/api}
+        NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-}
+    image: naturalvers-app:latest
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: ${APP_PORT:-3000}
+      HOSTNAME: 0.0.0.0
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:?PAYLOAD_SECRET es obligatorio (ver .env.example)}
+      # La variable que lee payload.config.ts es MONGODB_URI (no DATABASE_URI).
+      # `mongo` es el nombre del servicio en la red de Compose.
+      MONGODB_URI: mongodb://mongo:27017/${MONGO_DB_NAME:-naturalvers}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      NEXT_PUBLIC_PAYLOAD_API_URL: ${NEXT_PUBLIC_PAYLOAD_API_URL:-/api}
+      NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-}
+    ports:
+      # Puerto configurable desde .env (APP_PORT).
+      - "${APP_PORT:-3000}:${APP_PORT:-3000}"
+    volumes:
+      # Payload sube ficheros a ./media en runtime. Sin este volumen, cada
+      # recreación de contenedor pierde las imágenes subidas y el admin
+      # responde "File ... for collection media is missing on the disk".
+      - media_data:/app/media
+    healthcheck:
+      # node pelado con fetch global: la imagen no instala curl a propósito,
+      # para no engordar el runtime. /api/health devuelve 503 si Mongo no
+      # responde, así que `up -d --wait` no termina hasta que la app está
+      # realmente lista, no sólo el proceso arrancado.
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:'+(process.env.PORT||3000)+'/api/health').then(r=>{process.exit(r.ok?0:1)}).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+
+  # --------------------------------------------------------------------------
+  # mongo — MongoDB 7, sólo red interna
+  # --------------------------------------------------------------------------
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    # SIN "ports:": el puerto 27017 no se publica al host.
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-naturalvers}
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+volumes:
+  # Sobrevive a `docker compose down`; se borra con `down -v` (flag --clean).
+  mongo_data:
+  # Las subidas de Payload sobreviven a recreaciones del contenedor.
+  media_data:
