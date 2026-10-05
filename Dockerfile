@@ -44,7 +44,7 @@ COPY . .
 # queda con el número "vacío" compilado dentro del JS del navegador.
 # defaults idénticos a los de .env.example para que el build nunca falle por
 # una variable ausente; compose.prod.yaml los sobreescribe en build.
-ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
+ARG NEXT_PUBLIC_SITE_URL=http://localhost:3001
 ARG NEXT_PUBLIC_PAYLOAD_API_URL=/api
 ARG NEXT_PUBLIC_WHATSAPP_NUMBER=
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL

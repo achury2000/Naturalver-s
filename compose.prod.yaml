@@ -24,7 +24,7 @@ services:
         # build, no en runtime. Si no se pasan aquí, el navegador recibe
         # valores fijos compilados dentro del JS, y cambiar la variable en
         # .env no surtirá efecto hasta el próximo build.
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3001}
         NEXT_PUBLIC_PAYLOAD_API_URL: ${NEXT_PUBLIC_PAYLOAD_API_URL:-/api}
         NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-}
     image: naturalvers-app:latest
@@ -40,7 +40,7 @@ services:
       # La variable que lee payload.config.ts es MONGODB_URI (no DATABASE_URI).
       # `mongo` es el nombre del servicio en la red de Compose.
       MONGODB_URI: mongodb://mongo:27017/${MONGO_DB_NAME:-naturalvers}
-      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3001}
       NEXT_PUBLIC_PAYLOAD_API_URL: ${NEXT_PUBLIC_PAYLOAD_API_URL:-/api}
       NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER:-}
     ports:

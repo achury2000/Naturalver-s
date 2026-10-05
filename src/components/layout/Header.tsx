@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Container } from './container';
-import { Logo } from './logo';
+import { Logo } from './Logo';
 import { useCart } from '@/contexts/CartContext';
 
 export function Header() {

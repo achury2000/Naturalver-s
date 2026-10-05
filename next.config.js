@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3001';
 const site = new URL(siteUrl);
 const protocol = site.protocol.replace(':', '');
 

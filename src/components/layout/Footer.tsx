@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo } from './logo';
+import { Logo } from './Logo';
 import { getWhatsappNumber } from '@/lib/whatsapp';
 
 function formatWhatsappDisplay(number: string | null): string {

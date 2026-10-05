@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { CartDrawer } from '@/components/cart/cart-drawer';
+import { Header } from './Header';
+import { Footer } from './Footer';
 
 export function Layout({ children }: PropsWithChildren) {
   return (
@@ -13,6 +15,3 @@ export function Layout({ children }: PropsWithChildren) {
     </div>
   );
 }
-
-import { Header } from './header';
-import { Footer } from './footer';

@@ -7,12 +7,12 @@ async function getPayloadApiUrl(): Promise<string> {
   // In Server Components, construct full URL from headers
   try {
     const headersList = await headers();
-    const host = headersList.get('host') || 'localhost:3000';
+    const host = headersList.get('host') || 'localhost:3001';
     const protocol = host.includes('localhost') ? 'http' : 'https';
     return `${protocol}://${host}${envUrl}`;
   } catch {
     // Fallback for build time or non-request contexts
-    return `http://localhost:3000${envUrl}`;
+    return `http://localhost:3001${envUrl}`;
   }
 }
 
