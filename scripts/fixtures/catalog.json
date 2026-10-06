@@ -2,27 +2,15 @@
   "categories": [
     {
       "id": "cat1",
-      "name": "Suplementos",
-      "slug": "suplementos",
+      "name": "Cremas",
+      "slug": "cremas",
       "order": 1
     },
     {
       "id": "cat2",
-      "name": "Cosmética",
-      "slug": "cosmetica",
+      "name": "Aceites",
+      "slug": "aceites",
       "order": 2
-    },
-    {
-      "id": "cat3",
-      "name": "Alimentos",
-      "slug": "alimentos",
-      "order": 3
-    },
-    {
-      "id": "cat4",
-      "name": "Bebidas",
-      "slug": "bebidas",
-      "order": 4
     }
   ],
   "products": [
@@ -35,12 +23,12 @@
       "compareAtPrice": 120000,
       "category": {
         "id": "cat1",
-        "name": "Suplementos"
+        "name": "Cremas"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/036654/FFFFFF?text=Espirulina"
+            "url": "/media/Aceite De Coco.jpg"
           },
           "alt": "Espirulina"
         }
@@ -61,12 +49,12 @@
       "price": 65000,
       "category": {
         "id": "cat2",
-        "name": "Cosmética"
+        "name": "Cremas"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/69AB4F/FFFFFF?text=Crema+Facial"
+            "url": "/media/Crema Facial Unisex Aloe Vera.jpg"
           },
           "alt": "Crema Facial"
         }
@@ -88,12 +76,12 @@
       "compareAtPrice": 60000,
       "category": {
         "id": "cat3",
-        "name": "Alimentos"
+        "name": "Aceites"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/273B52/FFFFFF?text=Te+Verde"
+            "url": "/media/Aceite Rompe Dolor.jpg"
           },
           "alt": "Té Verde"
         }
@@ -114,12 +102,12 @@
       "price": 55000,
       "category": {
         "id": "cat3",
-        "name": "Alimentos"
+        "name": "Aceites"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/0CA6DF/FFFFFF?text=Aceite+Coco"
+            "url": "/media/Aceite De Coco.jpg"
           },
           "alt": "Aceite de Coco"
         }
@@ -140,12 +128,12 @@
       "price": 72000,
       "category": {
         "id": "cat2",
-        "name": "Cosmética"
+        "name": "Cremas"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/036654/FFFFFF?text=Shampoo"
+            "url": "/media/Crema Rompe Dolor 60ml.jpg"
           },
           "alt": "Shampoo Natural"
         }
@@ -167,12 +155,12 @@
       "compareAtPrice": 130000,
       "category": {
         "id": "cat1",
-        "name": "Suplementos"
+        "name": "Cremas"
       },
       "images": [
         {
           "image": {
-            "url": "https://placehold.co/400x400/69AB4F/FFFFFF?text=Mivitamnico"
+            "url": "/media/Crema Milagrosa De Azufre 250ml.jpg"
           },
           "alt": "Multivitamínico"
         }
