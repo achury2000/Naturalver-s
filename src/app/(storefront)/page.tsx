@@ -34,12 +34,10 @@ export default function HomePage() {
         <Container>
           <div className="text-center">
             <h2 className="font-heading text-3xl font-bold text-gray-900">Categorías</h2>
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-2 lg:grid-cols-2">
               {[
-                { name: 'Suplementos', icon: '🌿' },
-                { name: 'Cosmética', icon: '✨' },
-                { name: 'Alimentos', icon: '🍎' },
-                { name: 'Bebidas', icon: '🍵' },
+                { name: 'Cremas', icon: '🧴' },
+                { name: 'Aceites', icon: '🫒' },
               ].map((cat) => (
                 <a key={cat.name} href="/catalogo" className="group rounded-xl bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md">
                   <div className="text-4xl">{cat.icon}</div>
