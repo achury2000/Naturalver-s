@@ -6,12 +6,13 @@
  *
  * Contraste con `npm run seed` (scripts/seed.ts), que es DESTRUCTIVO:
  * ese script hace deleteMany({}) sobre products/categories/media y está
- * pensado sólo para desarrollo. Este NO borra nada.
+ * pensado sólo para desarrollo. Este SÓLO borra lo que aparece explícitamente
+ * en `obsoleteProductSlugs` del fixture (los productos demo antiguos).
  *
  * Estrategia: UPSERT por `slug`.
  *   - documento ausente  -> se crea
  *   - documento presente -> se actualiza su contenido conservando su _id
- *   - documento de más    -> se deja intacto (nunca se borra)
+ *   - documento de más    -> se deja intacto (salvo la lista obsoleta)
  * Por eso es seguro reejecutarlo tantas veces como haga falta.
  *
  * Plain .mjs a propósito: el runtime de producción no instala TypeScript ni
@@ -107,6 +108,20 @@ async function seed() {
     }
     logTally('Categorías', catTally);
 
+    // --- Poda de productos demo obsoletos (lista explícita del fixture) ----
+    // Sólo borra slugs listados en `obsoleteProductSlugs` + sus media
+    // (`<slug>.jpg`). Productos creados desde el panel nunca están en esa
+    // lista, así que se conservan siempre.
+    const obsolete = catalog.obsoleteProductSlugs ?? [];
+    if (obsolete.length) {
+      const obsoleteMedia = obsolete.map((slug) => `${slug}.jpg`);
+      const prunedProducts = await productsCol.deleteMany({ slug: { $in: obsolete } });
+      const prunedMedia = await mediaCol.deleteMany({ filename: { $in: obsoleteMedia } });
+      console.log(
+        `  Demo obsoletos eliminados: ${prunedProducts.deletedCount} productos, ${prunedMedia.deletedCount} media`,
+      );
+    }
+
     // --- Media: un documento por producto con imagen -----------------------
     const mediaTally = newTally();
     const mediaByFixtureId = new Map();
@@ -156,6 +171,33 @@ async function seed() {
       prodTally[r.action] += 1;
     }
     logTally('Productos', prodTally);
+
+    // --- Global home-banners (singleton, nunca se borra) --------------------
+    const globalsCol = db.collection('globals');
+    const banner = catalog.homeBanners;
+    if (banner) {
+      const slides = (banner.slides ?? []).map((slide) => ({
+        type: slide.type,
+        title: slide.title,
+        description: slide.description,
+        desktopImage:
+          mediaByFixtureId.get(slide.desktopImage?.productId) ?? undefined,
+        mobileImage:
+          mediaByFixtureId.get(slide.mobileImage?.productId) ?? undefined,
+        buttonLabel: slide.buttonLabel,
+        buttonLink: slide.buttonLink,
+        note: slide.note,
+        showSocialLinks: slide.showSocialLinks,
+        active: slide.active,
+      }));
+      const r = await upsertBy(globalsCol, 'globalType', 'home-banners', {
+        slides,
+        socialLinks: banner.socialLinks ?? null,
+      });
+      const bannerTally = newTally();
+      bannerTally[r.action] += 1;
+      logTally('Global home-banners', bannerTally);
+    }
 
     const [products, categories] = [
       await productsCol.countDocuments(),

@@ -13,165 +13,311 @@
       "order": 2
     }
   ],
+  "obsoleteProductSlugs": [
+    "espirulina",
+    "crema-facial",
+    "te-verde",
+    "aceite-coco",
+    "shampoo-natural",
+    "multivitaminico"
+  ],
   "products": [
     {
       "id": "1",
-      "name": "Suplemento de Espirulina",
-      "slug": "espirulina",
-      "description": "Suplemento natural rico en proteínas y hierro.",
-      "price": 85000,
-      "compareAtPrice": 120000,
-      "category": {
-        "id": "cat1",
-        "name": "Cremas"
-      },
+      "name": "Aceite de Coco",
+      "slug": "aceite-de-coco",
+      "description": "Aceite de coco puro, ideal para cocinar y para el cuidado de la piel.",
+      "price": 35000,
+      "category": { "id": "cat2", "name": "Aceites" },
       "images": [
         {
-          "image": {
-            "url": "/media/Aceite De Coco.jpg"
-          },
-          "alt": "Espirulina"
+          "image": { "url": "/api/media/file/aceite-de-coco.jpg" },
+          "alt": "Aceite de Coco"
         }
       ],
       "stock": 50,
       "inStock": true,
-      "rating": 4.5,
-      "reviewCount": 24,
-      "newArrival": true,
+      "rating": 4.6,
+      "reviewCount": 12,
+      "newArrival": false,
       "featured": true,
       "createdAt": "2025-01-01T00:00:00.000Z"
     },
     {
       "id": "2",
-      "name": "Crema Facial Natural",
-      "slug": "crema-facial",
-      "description": "Crema hidratante con ingredientes naturales.",
-      "price": 65000,
-      "category": {
-        "id": "cat2",
-        "name": "Cremas"
-      },
+      "name": "Aceite Rompe Dolor",
+      "slug": "aceite-rompe-dolor",
+      "description": "Aceite para masajes que ayuda a aliviar la tensión y los dolores musculares.",
+      "price": 30000,
+      "category": { "id": "cat2", "name": "Aceites" },
       "images": [
         {
-          "image": {
-            "url": "/media/Crema Facial Unisex Aloe Vera.jpg"
-          },
-          "alt": "Crema Facial"
+          "image": { "url": "/api/media/file/aceite-rompe-dolor.jpg" },
+          "alt": "Aceite Rompe Dolor"
         }
       ],
-      "stock": 30,
+      "stock": 50,
       "inStock": true,
-      "rating": 4.8,
-      "reviewCount": 18,
-      "newArrival": false,
+      "rating": 4.5,
+      "reviewCount": 9,
+      "newArrival": true,
       "featured": true,
       "createdAt": "2025-01-02T00:00:00.000Z"
     },
     {
       "id": "3",
-      "name": "Té Verde Orgánico",
-      "slug": "te-verde",
-      "description": "Té verde orgánico de alta calidad.",
+      "name": "Crema Facial Unisex Aloe Vera",
+      "slug": "crema-facial-aloe-vera",
+      "description": "Crema facial unisex con aloe vera que hidrata y cuida la piel todos los días.",
       "price": 45000,
-      "compareAtPrice": 60000,
-      "category": {
-        "id": "cat3",
-        "name": "Aceites"
-      },
+      "category": { "id": "cat1", "name": "Cremas" },
       "images": [
         {
-          "image": {
-            "url": "/media/Aceite Rompe Dolor.jpg"
-          },
-          "alt": "Té Verde"
+          "image": { "url": "/api/media/file/crema-facial-aloe-vera.jpg" },
+          "alt": "Crema Facial Unisex Aloe Vera"
         }
       ],
-      "stock": 100,
+      "stock": 40,
       "inStock": true,
-      "rating": 4.3,
-      "reviewCount": 32,
+      "rating": 4.7,
+      "reviewCount": 15,
       "newArrival": false,
-      "featured": false,
+      "featured": true,
       "createdAt": "2025-01-03T00:00:00.000Z"
     },
     {
       "id": "4",
-      "name": "Aceite de Coco Prensado",
-      "slug": "aceite-coco",
-      "description": "Aceite de coco prensado en frío.",
-      "price": 55000,
-      "category": {
-        "id": "cat3",
-        "name": "Aceites"
-      },
+      "name": "Crema Facial Unisex Aloe Vera 60ml",
+      "slug": "crema-facial-aloe-vera-60ml",
+      "description": "Presentación de 60ml de la crema facial unisex con aloe vera.",
+      "price": 25000,
+      "category": { "id": "cat1", "name": "Cremas" },
       "images": [
         {
-          "image": {
-            "url": "/media/Aceite De Coco.jpg"
-          },
-          "alt": "Aceite de Coco"
+          "image": { "url": "/api/media/file/crema-facial-aloe-vera-60ml.jpg" },
+          "alt": "Crema Facial Unisex Aloe Vera 60ml"
         }
       ],
-      "stock": 60,
+      "stock": 40,
       "inStock": true,
       "rating": 4.6,
-      "reviewCount": 15,
+      "reviewCount": 8,
       "newArrival": true,
       "featured": true,
       "createdAt": "2025-01-04T00:00:00.000Z"
     },
     {
       "id": "5",
-      "name": "Shampoo Natural",
-      "slug": "shampoo-natural",
-      "description": "Shampoo sin sulfatos con ingredientes naturales.",
-      "price": 72000,
-      "category": {
-        "id": "cat2",
-        "name": "Cremas"
-      },
+      "name": "Crema Milagrosa de Azufre 60ml",
+      "slug": "crema-milagrosa-azufre-60ml",
+      "description": "Crema de azufre en presentación de 60ml para el cuidado diario de la piel.",
+      "price": 15000,
+      "category": { "id": "cat1", "name": "Cremas" },
       "images": [
         {
-          "image": {
-            "url": "/media/Crema Rompe Dolor 60ml.jpg"
-          },
-          "alt": "Shampoo Natural"
+          "image": { "url": "/api/media/file/crema-milagrosa-azufre-60ml.jpg" },
+          "alt": "Crema Milagrosa de Azufre 60ml"
         }
       ],
-      "stock": 40,
+      "stock": 60,
       "inStock": true,
-      "rating": 4.4,
-      "reviewCount": 12,
+      "rating": 4.5,
+      "reviewCount": 6,
       "newArrival": false,
       "featured": false,
       "createdAt": "2025-01-05T00:00:00.000Z"
     },
     {
       "id": "6",
-      "name": "Vitamina Multivitamínico",
-      "slug": "multivitaminico",
-      "description": "Complejo vitamínico diario.",
-      "price": 95000,
-      "compareAtPrice": 130000,
-      "category": {
-        "id": "cat1",
-        "name": "Cremas"
-      },
+      "name": "Crema Milagrosa de Azufre 250ml",
+      "slug": "crema-milagrosa-azufre-250ml",
+      "description": "Crema de azufre en presentación de 250ml para el cuidado diario de la piel.",
+      "price": 30000,
+      "category": { "id": "cat1", "name": "Cremas" },
       "images": [
         {
-          "image": {
-            "url": "/media/Crema Milagrosa De Azufre 250ml.jpg"
-          },
-          "alt": "Multivitamínico"
+          "image": { "url": "/api/media/file/crema-milagrosa-azufre-250ml.jpg" },
+          "alt": "Crema Milagrosa de Azufre 250ml"
         }
       ],
-      "stock": 25,
+      "stock": 50,
       "inStock": true,
-      "rating": 4.7,
-      "reviewCount": 28,
-      "newArrival": true,
+      "rating": 4.6,
+      "reviewCount": 11,
+      "newArrival": false,
       "featured": true,
       "createdAt": "2025-01-06T00:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "name": "Crema Milagrosa de Azufre 350ml",
+      "slug": "crema-milagrosa-azufre-350ml",
+      "description": "Crema de azufre en presentación de 350ml para el cuidado diario de la piel.",
+      "price": 40000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-milagrosa-azufre-350ml.jpg" },
+          "alt": "Crema Milagrosa de Azufre 350ml"
+        }
+      ],
+      "stock": 45,
+      "inStock": true,
+      "rating": 4.6,
+      "reviewCount": 7,
+      "newArrival": false,
+      "featured": false,
+      "createdAt": "2025-01-07T00:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "name": "Crema Milagrosa de Azufre 500ml",
+      "slug": "crema-milagrosa-azufre-500ml",
+      "description": "Crema de azufre en presentación de 500ml para el cuidado diario de la piel.",
+      "price": 55000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-milagrosa-azufre-500ml.jpg" },
+          "alt": "Crema Milagrosa de Azufre 500ml"
+        }
+      ],
+      "stock": 40,
+      "inStock": true,
+      "rating": 4.7,
+      "reviewCount": 10,
+      "newArrival": false,
+      "featured": true,
+      "createdAt": "2025-01-08T00:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "name": "Crema Rompe Dolor 60ml",
+      "slug": "crema-rompe-dolor-60ml",
+      "description": "Crema tópica para el alivio de dolores musculares en presentación de 60ml.",
+      "price": 15000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-rompe-dolor-60ml.jpg" },
+          "alt": "Crema Rompe Dolor 60ml"
+        }
+      ],
+      "stock": 60,
+      "inStock": true,
+      "rating": 4.5,
+      "reviewCount": 5,
+      "newArrival": false,
+      "featured": false,
+      "createdAt": "2025-01-09T00:00:00.000Z"
+    },
+    {
+      "id": "10",
+      "name": "Crema Rompe Dolor 250g",
+      "slug": "crema-rompe-dolor-250g",
+      "description": "Crema tópica para el alivio de dolores musculares en presentación de 250g.",
+      "price": 28000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-rompe-dolor-250g.jpg" },
+          "alt": "Crema Rompe Dolor 250g"
+        }
+      ],
+      "stock": 50,
+      "inStock": true,
+      "rating": 4.6,
+      "reviewCount": 9,
+      "newArrival": false,
+      "featured": false,
+      "createdAt": "2025-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "11",
+      "name": "Crema Rompe Dolor 350ml",
+      "slug": "crema-rompe-dolor-350ml",
+      "description": "Crema tópica para el alivio de dolores musculares en presentación de 350ml.",
+      "price": 38000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-rompe-dolor-350ml.jpg" },
+          "alt": "Crema Rompe Dolor 350ml"
+        }
+      ],
+      "stock": 45,
+      "inStock": true,
+      "rating": 4.6,
+      "reviewCount": 6,
+      "newArrival": true,
+      "featured": false,
+      "createdAt": "2025-01-11T00:00:00.000Z"
+    },
+    {
+      "id": "12",
+      "name": "Crema Rompe Dolor 500ml",
+      "slug": "crema-rompe-dolor-500ml",
+      "description": "Crema tópica para el alivio de dolores musculares en presentación de 500ml.",
+      "price": 50000,
+      "category": { "id": "cat1", "name": "Cremas" },
+      "images": [
+        {
+          "image": { "url": "/api/media/file/crema-rompe-dolor-500ml.jpg" },
+          "alt": "Crema Rompe Dolor 500ml"
+        }
+      ],
+      "stock": 40,
+      "inStock": true,
+      "rating": 4.7,
+      "reviewCount": 8,
+      "newArrival": false,
+      "featured": true,
+      "createdAt": "2025-01-12T00:00:00.000Z"
     }
-  ]
+  ],
+  "homeBanners": {
+    "slides": [
+      {
+        "type": "offer",
+        "title": "¡Lleva un regalo con tu compra!",
+        "description": "Recibe un regalo con la compra de una crema de 500 ml.",
+        "desktopImage": { "productId": "1" },
+        "mobileImage": { "productId": "1" },
+        "buttonLabel": "Ver cremas",
+        "buttonLink": "/catalogo?category=cremas",
+        "note": "Otra condición: síguenos en TikTok @naturalvers e Instagram @naturalvers_21",
+        "showSocialLinks": true,
+        "active": true
+      },
+      {
+        "type": "shipping",
+        "title": "Envíos a todo el país",
+        "description": "Envío gratis por compras superiores a $100.000. Tu pedido llega a tu puerta en 2 días.",
+        "desktopImage": { "productId": "3" },
+        "mobileImage": { "productId": "3" },
+        "buttonLabel": null,
+        "buttonLink": null,
+        "note": "Cobertura en principales ciudades de Colombia",
+        "showSocialLinks": false,
+        "active": true
+      },
+      {
+        "type": "payment",
+        "title": "Paga contra entrega",
+        "description": "Solo pagas cuando recibes tu pedido. Aceptamos efectivo o transferencia.",
+        "desktopImage": { "productId": "6" },
+        "mobileImage": { "productId": "6" },
+        "buttonLabel": "Ver catálogo",
+        "buttonLink": "/catalogo",
+        "note": null,
+        "showSocialLinks": false,
+        "active": true
+      }
+    ],
+    "socialLinks": {
+      "instagram": "https://www.instagram.com/naturalvers_21",
+      "facebook": null,
+      "tiktok": "https://www.tiktok.com/@naturalvers"
+    }
+  }
 }

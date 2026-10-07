@@ -12,3 +12,4 @@ import catalog from './catalog.json';
 
 export const mockProducts = catalog.products;
 export const mockCategories = catalog.categories;
+export const mockHomeBanners = catalog.homeBanners;

@@ -84,9 +84,7 @@ export default async function CatalogoPage({
             <>
               <ProductGrid>
                 {productsResult.docs.map((product: any) => (
-                  <Link key={product.id} href={`/${product.slug}`} style={{ display: 'contents' }}>
-                    <ProductCard product={product} />
-                  </Link>
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </ProductGrid>
               {productsResult.totalPages > 1 && (

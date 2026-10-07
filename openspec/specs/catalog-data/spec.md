@@ -8,7 +8,7 @@ The storefront reads its catalog data from Payload CMS. This capability covers d
 
 ### Requirement: Catalog reads from the CMS
 
-The storefront SHALL render product listings, detail pages, and search results using data returned by the Payload REST API rather than static fixtures.
+The storefront SHALL render product listings, detail pages, search results, and home page featured products using data returned by the Payload REST API rather than static fixtures.
 
 #### Scenario: Catalog page requests products over the REST API
 - **WHEN** the catalog page loads
@@ -24,6 +24,16 @@ The storefront SHALL render product listings, detail pages, and search results u
 - **WHEN** a user submits a search query
 - **THEN** the query is passed to the Payload API `where[name][like]` filter
 - **AND** results are returned without client-side filtering of a full dataset
+
+#### Scenario: Featured products on home page use CMS data
+- **WHEN** the home page loads the featured products section
+- **THEN** products are retrieved via the Payload REST API products endpoint
+- **THEN** no static/hardcoded product data is used
+
+#### Scenario: Product queries request sufficient depth for images
+- **WHEN** querying products for the home page featured section
+- **THEN** the query SHALL request depth sufficient to resolve upload relations to URL objects
+- **THEN** images render without placeholders
 
 ### Requirement: Failures are visible, not silently absorbed
 

@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { mockProducts, mockCategories } from './fixtures/catalog';
+import { mockProducts, mockCategories, mockHomeBanners } from './fixtures/catalog';
 
 interface MockCategory {
   id: string;
@@ -142,6 +142,37 @@ async function seed() {
 
     await db.collection('products').insertMany(productsWithRelations);
     console.log(`Inserted ${productsWithRelations.length} products`);
+
+    // Insert the home-banners global. Payload stores globals in the `globals`
+    // collection keyed by `globalType` (the global slug), not by a `slug` field.
+    console.log('Inserting home-banners global...');
+    const bannerSlides = mockHomeBanners.slides.map((slide: any) => {
+      const desktopId = imageMap.get(slide.desktopImage?.productId);
+      const mobileId = imageMap.get(slide.mobileImage?.productId);
+      return {
+        type: slide.type,
+        title: slide.title,
+        description: slide.description,
+        desktopImage: desktopId ?? undefined,
+        mobileImage: mobileId ?? undefined,
+        buttonLabel: slide.buttonLabel,
+        buttonLink: slide.buttonLink,
+        note: slide.note,
+        showSocialLinks: slide.showSocialLinks,
+        active: slide.active,
+      };
+    });
+
+    await db.collection('globals').deleteMany({ globalType: 'home-banners' });
+    await db.collection('globals').insertOne({
+      _id: new ObjectId(),
+      globalType: 'home-banners',
+      slides: bannerSlides,
+      socialLinks: mockHomeBanners.socialLinks,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+    console.log(`Inserted home-banners global with ${bannerSlides.length} slides`);
 
     console.log('Seed completed successfully!');
   } catch (error) {

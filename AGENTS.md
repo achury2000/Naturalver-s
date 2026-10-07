@@ -107,8 +107,9 @@ They must **never** be nested — `RootLayout` renders its own `<html>`/`<body>`
 - **Only `queryPageBySlug` catches errors and returns `null`.** `queryProducts`,
   `queryCategories` and `queryProductBySlug` **throw**. This is exactly why `npm run build`
   survives with no API running: no statically-prerendered page calls the throwing helpers.
-  - `GET /`, `/nosotros`, `/blog`, `/contacto`, `/cuenta`, `/carrito`, `/pago`, `/confirmacion`
-    are static and touch nothing.
+  - `GET /` is dynamic (`ƒ`, `force-dynamic`) because `FeaturedProducts` calls
+    `queryFeaturedProducts`; `/nosotros`, `/blog`, `/contacto`, `/cuenta`, `/carrito`, `/pago`,
+    `/confirmacion` are static and touch nothing.
   - `GET /devolver`, `/envios`, `/preguntas`, `/privacidad`, `/terminos` are CMS-driven via
     `queryPageBySlug` (the null-safe one). They degrade to a "not available" state.
   - `/catalogo`, `/busqueda`, `/[slug]` are dynamic (`ƒ`) — they render per-request and will
@@ -119,7 +120,8 @@ They must **never** be nested — `RootLayout` renders its own `<html>`/`<body>`
 - `getPayloadApiUrl()` falls back to `headers()` for absolute URLs; with
   `NEXT_PUBLIC_PAYLOAD_API_URL=/api` this opts any calling route into dynamic rendering.
 - `getImageUrl()` (re-exported from `lib/media.ts`) falls back to `/placeholder-product.jpg`.
-  That file must exist in `public/`.
+  That file must exist in `public/`. Absolute Payload URLs under `/api/` are normalized to
+  same-origin paths so images work regardless of `NEXT_PUBLIC_SITE_URL`/port mismatches.
 - `src/types/index.ts` is **dead** — nothing imports it and every query returns `any`. Don't trust
   it as a contract; use the generated `src/types/payload.ts` types instead.
 

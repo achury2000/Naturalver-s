@@ -9,6 +9,7 @@ import { Users } from '@/collections/Users';
 import { Pages } from '@/collections/Pages';
 import { Categories } from '@/collections/Categories';
 import { Media } from '@/collections/Media';
+import { HomeBanners } from '@/globals/HomeBanners';
 
 const config = buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
@@ -17,6 +18,7 @@ const config = buildConfig({
     url: process.env.MONGODB_URI || 'mongodb://localhost:27017/naturalvers',
   }),
   collections: [Products, Orders, Users, Pages, Categories, Media],
+  globals: [HomeBanners],
   admin: {
     user: 'users',
     meta: {

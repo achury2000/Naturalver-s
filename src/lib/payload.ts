@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+import type { HomeBanner } from '@/types/payload';
 
 async function getPayloadApiUrl(): Promise<string> {
   const envUrl = process.env.NEXT_PUBLIC_PAYLOAD_API_URL || '/api';
@@ -78,12 +79,42 @@ export async function queryCategories(depth = 0) {
   ).then((res) => res.docs);
 }
 
+export async function queryCategoriesSafe(depth = 0): Promise<any[]> {
+  try {
+    return await queryCategories(depth);
+  } catch {
+    return [];
+  }
+}
+
+export async function queryFeaturedProducts(limit = 8, depth = 2) {
+  const base = { sort: '-createdAt', limit, depth, page: 1 } as const;
+  const featured = await queryProducts({
+    ...base,
+    where: { featured: { equals: true } },
+  }).then((res) => res.docs);
+  if (featured.length >= limit) return featured.slice(0, limit);
+
+  const newest = await queryProducts(base).then((res) => res.docs);
+  const seen = new Set(featured.map((doc) => String(doc.id)));
+  const fill = newest.filter((doc) => !seen.has(String(doc.id)));
+  return [...featured, ...fill].slice(0, limit);
+}
+
 export async function queryPageBySlug(slug: string) {
   try {
     const res = await payloadFetch<{ docs: any[] }>(
       `/pages?where[slug][equals]=${encodeURIComponent(slug)}&limit=1`
     );
     return res.docs[0] || null;
+  } catch {
+    return null;
+  }
+}
+
+export async function queryHomeBanners(): Promise<HomeBanner | null> {
+  try {
+    return await payloadFetch<HomeBanner>('/globals/home-banners?depth=1');
   } catch {
     return null;
   }

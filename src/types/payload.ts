@@ -91,8 +91,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'home-banners': HomeBanner;
+  };
+  globalsSelect: {
+    'home-banners': HomeBannersSelect<false> | HomeBannersSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -622,6 +626,66 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-banners".
+ */
+export interface HomeBanner {
+  id: string;
+  slides?:
+    | {
+        type?: ('offer' | 'shipping' | 'payment' | 'custom') | null;
+        title: string;
+        description?: string | null;
+        desktopImage: string | Media;
+        mobileImage: string | Media;
+        buttonLabel?: string | null;
+        buttonLink?: string | null;
+        note?: string | null;
+        showSocialLinks?: boolean | null;
+        active?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?: {
+    instagram?: string | null;
+    facebook?: string | null;
+    tiktok?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-banners_select".
+ */
+export interface HomeBannersSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        type?: T;
+        title?: T;
+        description?: T;
+        desktopImage?: T;
+        mobileImage?: T;
+        buttonLabel?: T;
+        buttonLink?: T;
+        note?: T;
+        showSocialLinks?: T;
+        active?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        instagram?: T;
+        facebook?: T;
+        tiktok?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
